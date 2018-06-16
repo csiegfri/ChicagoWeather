@@ -14,6 +14,7 @@ const options = {
 
 };
 
+var obj; // obj will contain the parsed json info for easy access.
 var date; //Date time
 var min_temp; //minimum temperature (default kelvin)
 var max_temp; //maximum temperature (kelvin)
@@ -33,10 +34,9 @@ var cloudiness; // % of cloudiness
 router.get('/', function(req, res, next){
   requ(options)
     .then(function(weather_json){
-
-      jlogin = JSON.stringify(profile_json.login);
+      obj = JSON.parse(weather_json);
   });
-  console.log(jlogin);
+  console.log(obj.city.name);
   next();
 });
 
@@ -46,13 +46,7 @@ router.get('/', function(req, res, next){
 router.get('/', function(req, res, next) {
   res.render('index', {
     title: 'Index',
-    log: jlogin,
-    id: jid,
-    ava: javatar,
-    html: jhtml_url,
-    name: jname,
-    bio: jbio,
-    update: jupdated_at });
+  });
 });
 
 module.exports = router;
