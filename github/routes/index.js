@@ -49,6 +49,9 @@ router.get('/', function(req, res, next) {
 
 module.exports = router;
 
+var cTemp;
+var minTemp;
+var maxTemp;
 function weatherReport(){
   var templateArea = document.querySelector("#report");
   var reports = document.querySelector("#reports");
@@ -56,16 +59,40 @@ function weatherReport(){
   var clone = document.importNode(templateArea.content,true);
 
   for(let x = 0; x < obj.list.length; x++){
-
+    cTemp = (obj.list[x].main.temp * (9/5)) - 459.67;
+    minTemp = (obj.list[x].main.temp_min * (9/5)) - 459.67;
+    maxTemp = (obj.list[x].main.temp_max * (9/5)) - 459.67;
     //adjusting values of the fields
-    var date = clone.querySelector("#name");
-    givenName.textContent = name; //name being the json name retrieved / Login
-    var givenAvatar = clone.querySelector("#avatar_url");
-    givenAvatar.src = avatar;
-    var givenRepos = clone.querySelector("#public_repos");
-    givenRepos.textContent = repos;
+    var nDate = clone.querySelector("#date");
+    nDate.textContent = obj.list[x].sys.date_txt;
+    var nTemp = clone.querySelector("#temp");
+    nTemp.textContent = cTemp
+    var nMin = clone.querySelector("#min_temp");
+    nMin.textContent = minTemp;
+    var nMax = clone.querySelector("#max_temp");
+    nMax.textContent = maxTemp;;
+    var nDate = clone.querySelector("#date");
+    nDate.textContent = obj.list[x].date;
+    var nDate = clone.querySelector("#date");
+    nDate.textContent = obj.list[x].date;
+    var nDate = clone.querySelector("#date");
+    nDate.textContent = obj.list[x].date;
+    var nDate = clone.querySelector("#date");
+    nDate.textContent = obj.list[x].date;
+    var nDate = clone.querySelector("#date");
+    nDate.textContent = obj.list[x].date;
+    var nDate = clone.querySelector("#date");
+    nDate.textContent = obj.list[x].date;
+    var nDate = clone.querySelector("#date");
+    nDate.textContent = obj.list[x].date;
+    var nDate = clone.querySelector("#date");
+    nDate.textContent = obj.list[x].date;
+    var nDate = clone.querySelector("#date");
+    nDate.textContent = obj.list[x].date;
+    var nDate = clone.querySelector("#date");
+    nDate.textContent = obj.list[x].date;
 
     //appending the template to the blockquote
-    profile.appendChild(clone);
+    reports.appendChild(clone);
   }
 }
