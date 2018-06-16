@@ -1,8 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1#intro= title
+  p#greet Welcome to #{title}
+  p#info This is for Project One in my API course. It takes info from
+    a(href = https://openweathermap.org/) openweathermap.org
+  p#info Thanks to that, I was able to make a weather report for Chicago!
+  p#info The table will automatically populate using a call to the openweathermap API, delivering a report for the next couple of days.
   table#reports
     tr
       th Date/time
@@ -19,4 +23,17 @@ block content
       th Ground Level Pressure (hPa)
       th Cloudiness %
   template#base
-    
+    tr
+      th ${date}
+      th ${min_temp}
+      th ${max_temp}
+      th ${temp}
+      th ${weather}
+      th ${weather_desc}
+      th ${humidity}
+      th ${wind_speed}
+      th ${wind_degree}
+      th ${pressure}
+      th ${sea_level}
+      th ${ground_level}
+      th ${cloudiness}
