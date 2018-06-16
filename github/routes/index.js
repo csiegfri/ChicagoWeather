@@ -50,19 +50,22 @@ router.get('/', function(req, res, next) {
 module.exports = router;
 
 function weatherReport(){
-  var templateArea = document.querySelector("#member");
-  var profile = document.querySelector("#profile");
+  var templateArea = document.querySelector("#report");
+  var reports = document.querySelector("#reports");
 
   var clone = document.importNode(templateArea.content,true);
 
-  //adjusting values of the fields
-  var givenName = clone.querySelector("#name");
-  givenName.textContent = name; //name being the json name retrieved / Login
-  var givenAvatar = clone.querySelector("#avatar_url");
-  givenAvatar.src = avatar;
-  var givenRepos = clone.querySelector("#public_repos");
-  givenRepos.textContent = repos;
+  for(let x = 0; x < obj.list.length; x++){
 
-  //appending the template to the blockquote
-  profile.appendChild(clone);
+    //adjusting values of the fields
+    var date = clone.querySelector("#name");
+    givenName.textContent = name; //name being the json name retrieved / Login
+    var givenAvatar = clone.querySelector("#avatar_url");
+    givenAvatar.src = avatar;
+    var givenRepos = clone.querySelector("#public_repos");
+    givenRepos.textContent = repos;
+
+    //appending the template to the blockquote
+    profile.appendChild(clone);
+  }
 }
