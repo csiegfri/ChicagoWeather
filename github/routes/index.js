@@ -52,6 +52,7 @@ module.exports = router;
 var minTemp;
 var cTemp;
 var maxTemp;
+var windDirection; // TODO need function to convert wind degree to understandable direction
 function weatherReport(){
   var templateArea = document.querySelector("#report");
   var reports = document.querySelector("#reports");
@@ -59,12 +60,13 @@ function weatherReport(){
   var clone = document.importNode(templateArea.content,true);
 
   for(let x = 0; x < obj.list.length; x++){
-    cTemp = (obj.list[x].main.temp * (9/5)) - 459.67;
+    cTemp = (obj.list[x].main.temp * (9/5)) - 459.67; // converts k to F
     minTemp = (obj.list[x].main.temp_min * (9/5)) - 459.67;
     maxTemp = (obj.list[x].main.temp_max * (9/5)) - 459.67;
+    windDirection = direction(obj.list[x].wind.deg); // converts degree to cardinal direction
     //adjusting values of the fields
     var nDate = clone.querySelector("#date");
-    nDate.textContent = obj.list[x].sys.date_txt;
+    nDate.textContent = obj.list[x].date_txt;
     var nTemp = clone.querySelector("#temp");
     nTemp.textContent = cTemp;
     var nMin = clone.querySelector("#min_temp");
@@ -75,26 +77,22 @@ function weatherReport(){
     nWeath.textContent = obj.list[x].weather[0].main;
     var nDesc = clone.querySelector("#weather_desc");
     nDesc.textContent = obj.list[x].weather[0].description;
-    var nDate = clone.querySelector("#date");
-    nDate.textContent = obj.list[x].date;
-    var nDate = clone.querySelector("#date");
-    nDate.textContent = obj.list[x].date;
-    var nDate = clone.querySelector("#date");
-    nDate.textContent = obj.list[x].date;
-    var nDate = clone.querySelector("#date");
-    nDate.textContent = obj.list[x].date;
-    var nDate = clone.querySelector("#date");
-    nDate.textContent = obj.list[x].date;
-    var nDate = clone.querySelector("#date");
-    nDate.textContent = obj.list[x].date;
-    var nDate = clone.querySelector("#date");
-    nDate.textContent = obj.list[x].date;
-    var nDate = clone.querySelector("#date");
-    nDate.textContent = obj.list[x].date;
-    var nDate = clone.querySelector("#date");
-    nDate.textContent = obj.list[x].date;
+    var nHum = clone.querySelector("#humidity");
+    nHum.textContent = obj.list[x].main.humidity;
+    var nSpeed = clone.querySelector("#wind_speed");
+    nSpeed.textContent = obj.list[x].wind.speed;
+    var nDate = clone.querySelector("#wind_degree");
+    nDate.textContent = windDirection;
+    var nDate = clone.querySelector("#pressure");
+    nDate.textContent = obj.list[x].main.pressure;
+    var nDate = clone.querySelector("#sea_level");
+    nDate.textContent = obj.list[x].main.sea_level;
+    var nDate = clone.querySelector("#ground_level");
+    nDate.textContent = obj.list[x].main.grnd_level;
+    var nDate = clone.querySelector("#cloudiness");
+    nDate.textContent = obj.list[x].clouds.all;
 
-    //appending the template to the blockquote
+    //appending the template to the table
     reports.appendChild(clone);
   }
 }
