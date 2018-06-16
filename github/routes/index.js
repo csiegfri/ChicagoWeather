@@ -34,7 +34,10 @@ var cloudiness; // % of cloudiness
 router.get('/', function(req, res, next){
   requ(options)
     .then(function(weather_json){
-      obj = JSON.parse(weather_json.list);
+      obj = weather_json;
+      console.log(weather_json.list[0].dt_txt);
+      console.log(obj.list[0].dt_txt);
+
   });
   next();
 });
@@ -74,19 +77,21 @@ function direction(degrees){
 }
 
 function weatherReport(){
+  var template = document.getElementById('report');
+  var reports = document.getElementById('allReports');
   var templateArea = document.querySelector("#report");
-  var reports = document.querySelector("#reports");
+  var reports = document.querySelector("#allReports");
 
   var clone = document.importNode(templateArea.content,true);
 
-  for(let x = 0; x < obj.length; x++){
-    cTemp = (obj[x].main.temp * (9/5)) - 459.67; // converts k to F
-    minTemp = (obj[x].main.temp_min * (9/5)) - 459.67;
-    maxTemp = (obj[x].main.temp_max * (9/5)) - 459.67;
-    windDirection = direction(obj[x].wind.deg); // converts degree to cardinal direction
+  for(let x = 0; x < obj.list.length; x++){
+    cTemp = (obj.list[x].main.temp * (9/5)) - 459.67; // converts k to F
+    minTemp = (obj.list[x].main.temp_min * (9/5)) - 459.67;
+    maxTemp = (obj.list[x].main.temp_max * (9/5)) - 459.67;
+    windDirection = direction(obj.list[x].wind.deg); // converts degree to cardinal direction
     //adjusting values of the fields
     var nDate = clone.querySelector("#date");
-    nDate.textContent = obj[x].date_txt;
+    nDate.textContent = obj.list[x].date_txt;
     var nTemp = clone.querySelector("#temp");
     nTemp.textContent = cTemp;
     var nMin = clone.querySelector("#min_temp");
@@ -94,23 +99,23 @@ function weatherReport(){
     var nMax = clone.querySelector("#max_temp");
     nMax.textContent = maxTemp;
     var nWeath = clone.querySelector("#weather");
-    nWeath.textContent = obj[x].weather[0].main;
+    nWeath.textContent = obj.list[x].weather[0].main;
     var nDesc = clone.querySelector("#weather_desc");
-    nDesc.textContent = obj[x].weather[0].description;
+    nDesc.textContent = obj.list[x].weather[0].description;
     var nHum = clone.querySelector("#humidity");
-    nHum.textContent = obj[x].main.humidity;
+    nHum.textContent = obj.list[x].main.humidity;
     var nSpeed = clone.querySelector("#wind_speed");
-    nSpeed.textContent = obj[x].wind.speed;
-    var nDate = clone.querySelector("#wind_degree");
-    nDate.textContent = windDirection;
-    var nDate = clone.querySelector("#pressure");
-    nDate.textContent = obj[x].main.pressure;
-    var nDate = clone.querySelector("#sea_level");
-    nDate.textContent = obj[x].main.sea_level;
-    var nDate = clone.querySelector("#ground_level");
-    nDate.textContent = obj[x].main.grnd_level;
-    var nDate = clone.querySelector("#cloudiness");
-    nDate.textContent = obj[x].clouds.all;
+    nSpeed.textContent = obj.list[x].wind.speed;
+    var nDeg = clone.querySelector("#wind_degree");
+    nDeg.textContent = windDirection;
+    var nPres = clone.querySelector("#pressure");
+    nPres.textContent = obj.list[x].main.pressure;
+    var nSea = clone.querySelector("#sea_level");
+    nSea.textContent = obj.list[x].main.sea_level;
+    var nGrn = clone.querySelector("#ground_level");
+    nGrn.textContent = obj.list[x].main.grnd_level;
+    var nCloud = clone.querySelector("#cloudiness");
+    nCloud.textContent = obj.list[x].clouds.all;
 
     //appending the template to the table
     reports.appendChild(clone);
