@@ -14,24 +14,27 @@ const options = {
 
 };
 
-var jlogin;
-var jid;
-var javatar;
-var jhtml_url;
-var jname;
-var jbio;
-var jupdated_at;
+var date; //Date time
+var min_temp; //minimum temperature (default kelvin)
+var max_temp; //maximum temperature (kelvin)
+var temp; //current temp (kelvin)
+var weather; //current weather status (rainy, snowy, clear, etc)
+var humidity; // % of humidity
+var wind_speed; // windspeed meters/second
+var wind_degree; // direction in degrees (meteorological)
+var weather_desc; // futher description of weather
+var lon; //longitude of location
+var lat; //latitude of location
+var pressure; //current pressure in hPa (hectopascal, 1 hPA = roughly 1 atm, or atmosphere)
+var sea_level; // Current pressure at sea level in hPa
+var ground_level; // Current pressure at ground level in hPa
+var cloudiness; // % of cloudiness
 
 router.get('/', function(req, res, next){
   requ(options)
-    .then(function(profile_json){
+    .then(function(weather_json){
+
       jlogin = JSON.stringify(profile_json.login);
-      jid = JSON.stringify(profile_json.id);
-      javatar = JSON.stringify(profile_json.avatar_url);
-      jhtml_url = JSON.stringify(profile_json.html_url);
-      jname = JSON.stringify(profile_json.name);
-      jbio = JSON.stringify(profile_json.bio);
-      jupdated_at = JSON.stringify(profile_json.updated_at);
   });
   console.log(jlogin);
   next();
