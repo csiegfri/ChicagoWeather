@@ -36,7 +36,6 @@ router.get('/', function(req, res, next){
     .then(function(weather_json){
       obj = JSON.parse(weather_json);
   });
-  console.log(obj.city.name);
   next();
 });
 
