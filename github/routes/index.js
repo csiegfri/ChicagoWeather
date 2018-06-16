@@ -6,7 +6,7 @@ var router = express.Router();
 const requ = require('request-promise-native');
 
 const options = {
-  uri: 'https://api.github.com/users/csiegfri',
+  uri: 'http://api.openweathermap.org/data/2.5/forecast?id=4887398&appid=083149282228ade2d95a8d79cd581982',
   headers: {
     'User-Agent': 'Request-Promise'
   },
