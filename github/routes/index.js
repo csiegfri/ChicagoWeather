@@ -49,8 +49,8 @@ router.get('/', function(req, res, next) {
 
 module.exports = router;
 
-var cTemp;
 var minTemp;
+var cTemp;
 var maxTemp;
 function weatherReport(){
   var templateArea = document.querySelector("#report");
@@ -66,13 +66,15 @@ function weatherReport(){
     var nDate = clone.querySelector("#date");
     nDate.textContent = obj.list[x].sys.date_txt;
     var nTemp = clone.querySelector("#temp");
-    nTemp.textContent = cTemp
+    nTemp.textContent = cTemp;
     var nMin = clone.querySelector("#min_temp");
     nMin.textContent = minTemp;
     var nMax = clone.querySelector("#max_temp");
-    nMax.textContent = maxTemp;;
-    var nDate = clone.querySelector("#date");
-    nDate.textContent = obj.list[x].date;
+    nMax.textContent = maxTemp;
+    var nWeath = clone.querySelector("#weather");
+    nWeath.textContent = obj.list[x].weather[0].main;
+    var nDesc = clone.querySelector("#weather_desc");
+    nDesc.textContent = obj.list[x].weather[0].description;
     var nDate = clone.querySelector("#date");
     nDate.textContent = obj.list[x].date;
     var nDate = clone.querySelector("#date");
