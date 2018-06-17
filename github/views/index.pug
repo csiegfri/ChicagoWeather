@@ -8,7 +8,7 @@ block content
     a(href = "https://openweathermap.org/") openweathermap.org
   p#info Thanks to that, I was able to make a weather report for Chicago!
   p#info The table will automatically populate using a call to the openweathermap API, delivering a report for the next couple of days.
-  //include template.html
+  
   table#allReports
     thead
       tr#tHeading
@@ -17,13 +17,11 @@ block content
         th Min Temp (F)
         th Max Temp (F)
         th Weather
-        th Description
-        th Wind Speed (m/s)
+        th Cloudiness 
+        th Humidity 
+        th Wind Speed (mph)
         th Wind direction
         th Pressure (hPa)
-        th Sea Level Pressure
-        th Ground Level Pressure
-        th Cloudiness
     tbody
       for report in reports
         tr
@@ -32,10 +30,8 @@ block content
           td #{report.min}
           td #{report.max}
           td #{report.weath}
-          td #{report.desc}
+          td #{report.cloud}
+          td #{report.hum}
           td #{report.speed}
           td #{report.dir}
           td #{report.pres}
-          td #{report.sea}
-          td #{report.grn}
-          td #{report.cloud}
