@@ -34,7 +34,8 @@ var cloudiness; // % of cloudiness
 router.get('/', function(req, res, next){
   requ(options)
     .then(function(weather_json){
-      obj = JSON.parse(weather_json);
+      obj = weather_json;
+      console.log(obj.city.name);
   });
   next();
 });
@@ -43,6 +44,7 @@ router.get('/', function(req, res, next){
 router.get('/', function(req, res, next) {
   res.render('index', {
     title: 'Chicago Weather',
+    data: obj
   });
 });
 
