@@ -38,7 +38,7 @@ var windDirection;
 router.get('/', function(req, res, next){
   requ(options)
     .then(function(weather_json){
-      allWeather = weather_json;
+      obj = weather_json;
       console.log(weather_json.list[0].dt_txt);
       console.log(obj.list[0].dt_txt + " Got all weather");
       let fullReport = [];
@@ -52,9 +52,9 @@ router.get('/', function(req, res, next){
         //adjusting values of the fields
         let report = {
           date: obj.list[x].dt_txt,
-          temp: cTemp,
-          min: minTemp,
-          max: maxTemp,
+          temp: cTemp.toFixed(1),
+          min: minTemp.toFixed(1),
+          max: maxTemp.toFixed(1),
           weath: obj.list[x].weather[0].main,
           desc: obj.list[x].weather[0].description,
           hum: obj.list[x].main.humidity,
@@ -73,7 +73,6 @@ router.get('/', function(req, res, next){
 
       res.render('index', {
         title: 'Chicago Weather',
-        cDT: Date(results.executionTime),
         reports: fullReport
       });
 
