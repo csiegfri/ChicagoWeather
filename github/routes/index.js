@@ -47,6 +47,10 @@ router.get('/', function(req, res, next) {
   res.render('index', {
     title: 'Chicago Weather',
   });
+  next();
+});
+
+router.get('/',function(req,res){
   weatherReport();
 });
 
@@ -78,6 +82,7 @@ function direction(degrees){
 }
 
 function weatherReport(){
+//  console.log(obj.city.name + " loaded.");
   var table = document.getElementById("allReports");
 
   for(let x = 0; x < obj.list.length; x++){
@@ -144,4 +149,5 @@ function weatherReport(){
     td.innerHtml = nCloud;
     tr.appendChild(td);
   }
+  //console.log("Report complete!");
 }
