@@ -14,7 +14,7 @@ const options = {
 
 };
 
-var obj; // obj will contain the json info for easy access.
+//Contains all conversions from original values.
 let conversions{
   mintemp:0,
   cTemp:0,
@@ -26,7 +26,7 @@ let conversions{
 router.get('/', function(req, res, next){
   requ(options)
     .then(function(weather_json){
-      obj = weather_json;
+      let obj = weather_json; //There's 2 mainly for the diagnostic;
       console.log(weather_json.list[0].dt_txt);
       console.log(obj.list[0].dt_txt + " Got all weather");
       let fullReport = [];
@@ -53,14 +53,14 @@ router.get('/', function(req, res, next){
         }
         //date time in yyyy-mm-dd hh:mm:ss
         //Temp default Kelvin
-        //Wind speed is m/s
-        //wind direction uses degree notation
+        //Wind default m/s
+        //wind direction default uses degree notation
         //humidity %, cloudiness is % of cloud cover
         fullReport.push(report);
 
 
       };
-
+      //Once the reoort is populated with all requests, sends over to pug for construction
       res.render('index', {
         title: 'Chicago Weather',
         reports: fullReport
@@ -71,8 +71,6 @@ router.get('/', function(req, res, next){
 
 
 module.exports = router;
-
- // TODO need function to convert wind degree to understandable direction
 
 function direction(degrees){
   // The direction() function takes the degree of the wind, and converts it into an understandable cardinal direction
