@@ -30,30 +30,60 @@ var pressure; //current pressure in hPa (hectopascal, 1 hPA = roughly 1 atm, or 
 var sea_level; // Current pressure at sea level in hPa
 var ground_level; // Current pressure at ground level in hPa
 var cloudiness; // % of cloudiness
+var minTemp;
+var cTemp;
+var maxTemp;
+var windDirection;
 
 router.get('/', function(req, res, next){
   requ(options)
     .then(function(weather_json){
-      obj = weather_json;
-      console.log(obj.city.name);
+      allWeather = weather_json;
+      console.log(weather_json.list[0].dt_txt);
+      console.log(obj.list[0].dt_txt + " Got all weather");
+      let fullReport = [];
+
+      for(let x = 0; x < obj.list.length; x++){
+
+        cTemp = (obj.list[x].main.temp * (9/5)) - 459.67; // converts k to F
+        minTemp = (obj.list[x].main.temp_min * (9/5)) - 459.67;
+        maxTemp = (obj.list[x].main.temp_max * (9/5)) - 459.67;
+        windDirection = direction(obj.list[x].wind.deg); // converts degree to cardinal direction
+        //adjusting values of the fields
+        let report = {
+          date: obj.list[x].dt_txt,
+          temp: cTemp,
+          min: minTemp,
+          max: maxTemp,
+          weath: obj.list[x].weather[0].main,
+          desc: obj.list[x].weather[0].description,
+          hum: obj.list[x].main.humidity,
+          speed: obj.list[x].wind.speed,
+          dir: windDirection,
+          pres: obj.list[x].main.pressure,
+          sea: obj.list[x].main.sea_level,
+          grn: obj.list[x].main.grnd_level,
+          cloud: obj.list[x].clouds.all
+        }
+
+        fullReport.push(report);
+
+
+      };
+
+      res.render('index', {
+        title: 'Chicago Weather',
+        cDT: Date(results.executionTime),
+        reports: fullReport
+      });
+
   });
-  next();
 });
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', {
-    title: 'Chicago Weather',
-    data: obj
-  });
-});
 
 module.exports = router;
 
-var minTemp;
-var cTemp;
-var maxTemp;
-var windDirection; // TODO need function to convert wind degree to understandable direction
+ // TODO need function to convert wind degree to understandable direction
 
 function direction(degrees){
   // The direction() function takes the degree of the wind, and converts it into an understandable cardinal direction
@@ -75,46 +105,68 @@ function direction(degrees){
   else return "N-NW";
 }
 
-function weatherReport(){
-  var templateArea = document.querySelector("#report");
-  var reports = document.querySelector("#reports");
-
-  var clone = document.importNode(templateArea.content,true);
-
+function weatherReport(obj){
+//  console.log(obj.city.name + " loaded.");
   for(let x = 0; x < obj.list.length; x++){
+    td.appendChild();
     cTemp = (obj.list[x].main.temp * (9/5)) - 459.67; // converts k to F
     minTemp = (obj.list[x].main.temp_min * (9/5)) - 459.67;
     maxTemp = (obj.list[x].main.temp_max * (9/5)) - 459.67;
     windDirection = direction(obj.list[x].wind.deg); // converts degree to cardinal direction
     //adjusting values of the fields
-    var nDate = clone.querySelector("#date");
-    nDate.textContent = obj.list[x].date_txt;
-    var nTemp = clone.querySelector("#temp");
-    nTemp.textContent = cTemp;
-    var nMin = clone.querySelector("#min_temp");
-    nMin.textContent = minTemp;
-    var nMax = clone.querySelector("#max_temp");
-    nMax.textContent = maxTemp;
-    var nWeath = clone.querySelector("#weather");
-    nWeath.textContent = obj.list[x].weather[0].main;
-    var nDesc = clone.querySelector("#weather_desc");
-    nDesc.textContent = obj.list[x].weather[0].description;
-    var nHum = clone.querySelector("#humidity");
-    nHum.textContent = obj.list[x].main.humidity;
-    var nSpeed = clone.querySelector("#wind_speed");
-    nSpeed.textContent = obj.list[x].wind.speed;
-    var nDate = clone.querySelector("#wind_degree");
-    nDate.textContent = windDirection;
-    var nDate = clone.querySelector("#pressure");
-    nDate.textContent = obj.list[x].main.pressure;
-    var nDate = clone.querySelector("#sea_level");
-    nDate.textContent = obj.list[x].main.sea_level;
-    var nDate = clone.querySelector("#ground_level");
-    nDate.textContent = obj.list[x].main.grnd_level;
-    var nDate = clone.querySelector("#cloudiness");
-    nDate.textContent = obj.list[x].clouds.all;
 
-    //appending the template to the table
-    reports.appendChild(clone);
+    var nDate = obj.list[x].dt_txt;
+    td.innerHtml = JSON.stringify(nDate);
+  //  txt = document.createTextNode(JSON.stringify(nDate));
+    //td.appendChild(txt);
+    tr.appendChild(td);
+
+    var nTemp = cTemp;
+    td.innerHtml = nTemp;
+    tr.appendChild(td);
+
+    var nMin = minTemp;
+    td.innerHtml = nMin;
+    tr.appendChild(td);
+
+    var nMax = maxTemp;
+    td.innerHtml = nMax;
+    tr.appendChild(td);
+
+    var nWeath = obj.list[x].weather[0].main;
+    td.innerHtml = JSON.stringify(nWeath);
+    tr.appendChild(td);
+
+    var nDesc = obj.list[x].weather[0].description;
+    td.innerHtml = JSON.stringify(nDesc);
+    tr.appendChild(td);
+
+    var nHum = obj.list[x].main.humidity;
+    td.innerHtml = JSON.stringify(nHum);
+    tr.appendChild(td);
+
+    var nSpeed = obj.list[x].wind.speed;
+    td.innerHtml = JSON.stringify(nSpeed);
+    tr.appendChild(td);
+
+    td.innerHtml = windDirection;
+    tr.appendChild(td);
+
+    var nPres = obj.list[x].main.pressure;
+    td.innerHtml = JSON.stringify(nPres);
+    tr.appendChild(td);
+
+    var nSea = obj.list[x].main.sea_level;
+    td.innerHtml = JSON.stringify(nSea);
+    tr.appendChild(td);
+
+    var nGrn = obj.list[x].main.grnd_level;
+    td.innerHtml = JSON.stringify(nGrn);
+    tr.appendChild(td);
+
+    var nCloud = obj.list[x].clouds.all;
+    td.innerHtml = nCloud;
+    tr.appendChild(td);
   }
+  //console.log("Report complete!");
 }
