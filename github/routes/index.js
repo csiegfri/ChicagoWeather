@@ -47,6 +47,7 @@ router.get('/', function(req, res, next) {
   res.render('index', {
     title: 'Chicago Weather',
   });
+  weatherReport();
 });
 
 module.exports = router;
@@ -142,8 +143,5 @@ function weatherReport(){
     var nCloud = obj.list[x].clouds.all;
     td.innerHtml = nCloud;
     tr.appendChild(td);
-
-    //appending the template to the table
-    reports.appendChild(clone);
   }
 }
