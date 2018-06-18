@@ -1,7 +1,5 @@
 NEED
-Remove the github folder, and move all contents into ChicagoWeather proper
 
-Once finalized with that, work on the stylesheet - Need to pull and see how it functions
 
 Also weekly problem when stylesheet complete
 
@@ -16,3 +14,7 @@ stop using var dang it - DONE
 convert the wind direction ifs to switches - Decided that Switch just wont work
 
 Find better way to utilize the data? Not in table, but in some other type of display. - Cut down on some columns
+
+Remove the github folder, and move all contents into ChicagoWeather proper
+
+Once finalized with that, work on the stylesheet - Need to pull and see how it functions
