@@ -15,7 +15,7 @@ const options = {
 };
 
 //Contains all conversions from original values.
-let conversions{
+let conversions = {
   mintemp:0,
   cTemp:0,
   maxTemp:0,
