@@ -89,10 +89,17 @@ table, div{
 	background-color: rgba(255,255,255,0.7);/*Mostly transparent background*/
 }
 
-
-
-
-
 a {
   color: #00B7FF;
+}
+
+@media (max-height:40em) and (orientation: portrait){
+	body{
+		padding:0em;
+		font: 0.5em "Libre Baskerville", serif;
+	}
+	table, td, th, div{
+		padding: .3em;
+		border-width: .1em;
+	}
 }
