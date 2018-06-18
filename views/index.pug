@@ -1,14 +1,14 @@
 extends layout
 
 block content
-  //script(src="../routes/index.js") weatherReport();
-  h1#intro= title
-  p#greet Welcome to #{title}
-  p#info This is for Project One in my API course. It takes info from
-    a(href = "https://openweathermap.org/") openweathermap.org
-  p#info Thanks to that, I was able to make a weather report for Chicago!
-  p#info The table will automatically populate using a call to the openweathermap API, delivering a report for the next couple of days.
-  
+  div
+    h1#intro= title
+    p#greet Welcome to #{title}
+    p#info This is for Project One in my API course. It takes info from
+      a(href = "https://openweathermap.org/") openweathermap.org
+    p#info Thanks to that, I was able to make a weather report for Chicago!
+    p#info The table will automatically populate using a call to the openweathermap API, delivering a report for the next couple of days.
+
   table#allReports
     thead
       tr#tHeading
@@ -17,8 +17,8 @@ block content
         th Min Temp (F)
         th Max Temp (F)
         th Weather
-        th Cloudiness 
-        th Humidity 
+        th Cloudiness
+        th Humidity
         th Wind Speed (mph)
         th Wind direction
         th Pressure (hPa)
