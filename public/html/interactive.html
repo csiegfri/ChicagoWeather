@@ -1,7 +1,7 @@
 <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js'></script>
 <script src="../javascripts/buttons.js"></script> <!--Gets the JS code for interacting with the website-->
 
-<section (ng-app="App" ng-controller="Controller")>
+<section ng-app="App" ng-controller="Controller">
 <p> City: <select ng-model="selectedCity" ng-options="x for x in cities"></select></p>
 <p> System of measurement: <select ng-model="selectedUnit" ng-options="y for y in measures"></select></p>
 <p> Number of reports: <select ng-model="displayNum" ng-options="z for z in display"></select></p>
