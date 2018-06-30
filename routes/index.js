@@ -6,7 +6,7 @@ var router = express.Router();
 const requ = require('request-promise-native');
 
 const options = {
-  uri: 'http://api.openweathermap.org/data/2.5/forecast?id=4887398&appid=083149282228ade2d95a8d79cd581982',
+  uri: 'http://api.openweathermap.org/data/2.5/forecast?id=4887398&appid=083149282228ade2d95a8d79cd581982&units=imperial',
   headers: {
     'User-Agent': 'Request-Promise'
   },
@@ -33,9 +33,9 @@ router.get('/', function(req, res, next){
 
       for(let x = 0; x < obj.list.length; x++){
 
-        conversions.cTemp = (obj.list[x].main.temp * (9/5)) - 459.67; // converts k to F
-        conversions.minTemp = (obj.list[x].main.temp_min * (9/5)) - 459.67;
-        conversions.maxTemp = (obj.list[x].main.temp_max * (9/5)) - 459.67;
+        conversions.cTemp = obj.list[x].main.temp ; // Already in imperial format
+        conversions.minTemp = obj.list[x].main.temp_min ;
+        conversions.maxTemp = obj.list[x].main.temp_max ;
         conversions.windDirection = direction(obj.list[x].wind.deg); // converts degree notation to cardinal direction
         conversions.windSpeed = obj.list[x].wind.speed * 2.23694; // converts m/s to mph
         //adjusting values of the fields
