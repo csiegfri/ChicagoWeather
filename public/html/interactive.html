@@ -6,8 +6,9 @@
 <p> City: <select ng-model="selectedCity" ng-options="x for x in cities"></select></p>
 <p> System of measurement: <select ng-model="selectedUnit" ng-options="y for y in measures"></select></p>
 <p> Number of reports: <select ng-model="displayNum" ng-options="z for z in display"></select></p>
-<p>Click to generate the weather report: <input type="button" ng-click="drawTable(selectedCity,selectedUnit,displayNum)" value="Create Report"></p>
-<p>Help: <input type="button" ng-click="help()" value="Help"></p>
+<p>Click to Generate then Load to get the weather report: <input type="button" ng-click="drawTable(selectedCity,selectedUnit,displayNum)" value="Generate"> <input type="button" ng-click="load()" value="Load"></p>
+<p></p>
+<h2>{{bigHead}}</h2>
 <table id="allReports">
   <thead>
     <tr id="tHeading">
@@ -16,7 +17,7 @@
       <th>Min Temp</th>
       <th>Max Temp</th>
       <th>Weather</th>
-      <th>Cloudiness</th>
+      <th>Cloudiness</th>Help
       <th>Humidity</th>
       <th>Wind Speed (mph)</th>
       <th>Wind Direction</th>

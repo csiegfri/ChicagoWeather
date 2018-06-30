@@ -18,9 +18,10 @@ app.controller('Controller',function($scope){
   $scope.display = [5,10,15,"All"]; //Amount of reports to display at once.
   $scope.displayNum = $scope.display[0];
   $scope.reportList = [];
+  $scope.bigHead = "";
 
-  $scope.help = function(){
-    console.log("help");
+  $scope.load = function(){
+    $scope.bigHead = $scope.selectedCity + " Report";
   };
 
 
@@ -50,41 +51,39 @@ app.controller('Controller',function($scope){
     console.log(url);
 
     $.getJSON(url, function(obj){//Contains the weather json info
-        console.log(obj.list[0].dt_txt);
-        if(disp === "All"){
-          disp = obj.list.length;
+      console.log(obj.list[0].dt_txt);
+      if(disp === "All"){
+        disp = obj.list.length;
+      }
+      console.log(disp);
+      $scope.reportList = []; //Resets current list before running.
+      for(let x = 0; x < disp; x++){
+        conversions.cTemp = obj.list[x].main.temp ; // Already in correct format
+        conversions.minTemp = obj.list[x].main.temp_min ;
+        conversions.maxTemp = obj.list[x].main.temp_max ;
+        conversions.windDirection = direction(obj.list[x].wind.deg); // converts degree notation to cardinal direction
+        conversions.windSpeed = obj.list[x].wind.speed * 2.23694; // converts m/s to mph
+        //adjusting values of the fields
+        let report = {
+          date: obj.list[x].dt_txt,
+          temp: conversions.cTemp.toFixed(1),
+          min: conversions.minTemp.toFixed(1),
+          max: conversions.maxTemp.toFixed(1),
+          weath: obj.list[x].weather[0].main,
+          hum: obj.list[x].main.humidity,
+          speed: conversions.windSpeed.toFixed(2),
+          dir: conversions.windDirection,
+          pres: obj.list[x].main.pressure,
+          cloud: obj.list[x].clouds.all
         }
-        console.log(disp);
-        $scope.reportList = []; //Resets current list before running.
-
-        for(let x = 0; x < disp; x++){
-
-          conversions.cTemp = obj.list[x].main.temp ; // Already in correct format
-          conversions.minTemp = obj.list[x].main.temp_min ;
-          conversions.maxTemp = obj.list[x].main.temp_max ;
-          conversions.windDirection = direction(obj.list[x].wind.deg); // converts degree notation to cardinal direction
-          conversions.windSpeed = obj.list[x].wind.speed * 2.23694; // converts m/s to mph
-          //adjusting values of the fields
-          let report = {
-            date: obj.list[x].dt_txt,
-            temp: conversions.cTemp.toFixed(1),
-            min: conversions.minTemp.toFixed(1),
-            max: conversions.maxTemp.toFixed(1),
-            weath: obj.list[x].weather[0].main,
-            hum: obj.list[x].main.humidity,
-            speed: conversions.windSpeed.toFixed(2),
-            dir: conversions.windDirection,
-            pres: obj.list[x].main.pressure,
-            cloud: obj.list[x].clouds.all
-          }
-          //date time in yyyy-mm-dd hh:mm:ss
-          //Wind default m/s
-          //wind direction default uses degree notation
-          //humidity %, cloudiness is % of cloud cover
-          $scope.reportList.push(report);
-        };
-        console.log(disp);
-      });
-
-    };
+        //date time in yyyy-mm-dd hh:mm:ss
+        //Wind default m/s
+        //wind direction default uses degree notation
+        //humidity %, cloudiness is % of cloud cover
+        $scope.reportList.push(report);
+      };
+      console.log(disp);
+    });
+    $scope.reportList;
+  };
 });
