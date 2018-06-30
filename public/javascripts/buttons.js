@@ -22,8 +22,9 @@ app.controller('Controller',function($scope){
   $scope.selectedCity = $scope.cities[0]; // Default to Chicago
   let ids = ["4887398","4883817","4896861","4907959","4905687"]; //coressponding API ids for the city they're associated with. The id of cities[0] is ids[0], and so on
   $scope.measures = ["imperial","metric"]; //chooses units of measurement (F and C)
-  $scope.selectedUnit = $scope.measures[0]; //Defailt to F
+  $scope.selectedUnit = $scope.measures[0]; //Default to F
   $scope.display = [5,10,15,"All"]; //Amount of reports to display at once.
+  $scope.displayNum = [5];
   $scope.reportList = [];
 
   function direction(degrees){
@@ -50,13 +51,13 @@ app.controller('Controller',function($scope){
       .then(function(weather_json)){
         let obj = weather_json;
         let fullReport = [];
-        if(displayNum === "All"){
-          displayNum = obj.list.length;
+        if(disp === "All"){
+          disp = obj.list.length;
         }
 
         $scope.reportList = []; //Resets current list before running.
 
-        for(let x = 0; x < displayNum; x++){
+        for(let x = 0; x < disp; x++){
 
           conversions.cTemp = obj.list[x].main.temp ; // Already in correct format
           conversions.minTemp = obj.list[x].main.temp_min ;
