@@ -17,6 +17,14 @@ app.controller('Controller',function($scope){
   $scope.measures = ["imperial","metric"];
   $scope.display = [5,10,15,"All"];
 
+  function direction(degrees){
+    // The direction() function takes the degree of the wind, and converts it into an understandable cardinal direction
+    if(degrees >= 348.75) degrees = 0;
+    let cardinal = ["N","N-NE","NE","E-NE","E","E-SE","SE","S-SE","S","S-SW","SW","W-SW","W","W-NW","NW","N-NW"];
+    let index = Math.floor(degrees/22.5);
+    return cardinal[index];
+  };
+
   $scope.drawTable = function(city, unit, disp){
     let id = "";
     for(let x = 0; x < $scope.cities.length; x++){
@@ -65,7 +73,7 @@ app.controller('Controller',function($scope){
           fullReport.push(report);
         };
         let table = document.getElementById('generatedReports');
-        
+
       };
 
   }
