@@ -6,9 +6,8 @@ block content
     p#greet Welcome to #{title}
     p#info This is for Project One in my API course. It takes info from
       a(href = "https://openweathermap.org/") openweathermap.org
-    p#info Thanks to that, I was able to make a weather report for Chicago!
-    p#info The table will automatically populate using a call to the openweathermap API, delivering a report for the next couple of days.
-
+    p#info Thanks to that, I was able to make a weather report for Chicago, as well as other cities you can call.
+    p#info Currently Chicago is on display, but that can be adjusted with the nearby dropdown menu.
     p The API lists the weather report over the next 5 days in intervals of 3 hours.
 
   table#allReports
@@ -25,15 +24,17 @@ block content
         th Wind direction
         th Pressure (hPa)
     tbody
-      for report in reports
+      - let counter = 0;
+      while counter < displays
         tr
-          td #{report.date}
-          td #{report.temp}
-          td #{report.min}
-          td #{report.max}
-          td #{report.weath}
-          td #{report.cloud}
-          td #{report.hum}
-          td #{report.speed}
-          td #{report.dir}
-          td #{report.pres}
+          td #{reports[counter].date}
+          td #{reports[counter].temp}
+          td #{reports[counter].min}
+          td #{reports[counter].max}
+          td #{reports[counter].weath}
+          td #{reports[counter].cloud}
+          td #{reports[counter].hum}
+          td #{reports[counter].speed}
+          td #{reports[counter].dir}
+          td #{reports[counter].pres}
+        - counter++;
