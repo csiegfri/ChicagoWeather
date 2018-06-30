@@ -16,10 +16,10 @@ app.controller('Controller',function($scope){
   $scope.measures = ["imperial","metric"]; //chooses units of measurement (F and C)
   $scope.selectedUnit = $scope.measures[0]; //Default to F
   $scope.display = [5,10,15,"All"]; //Amount of reports to display at once.
-  $scope.displayNum = [5];
+  $scope.displayNum = $scope.display[0];
   $scope.reportList = [];
 
-  function help(){
+  $scope.help = function(){
     console.log("help");
   };
 
@@ -35,23 +35,27 @@ app.controller('Controller',function($scope){
   $scope.drawTable = function(city, unit, disp){
     let id = "";
 
+    console.log(city);
+    console.log(unit);
+    console.log(disp);
+
     for(let x = 0; x < $scope.cities.length; x++){
       if(city === $scope.cities[x]){
         id = ids[x];
       }
     };
+    console.log(id);
 
     let url = "http://api.openweathermap.org/data/2.5/forecast?id=" + id + "&appid=083149282228ade2d95a8d79cd581982&units=" + unit;
-
+    console.log(url);
 
     fetch(url)
-      .then(function(weather_json){
-        let obj = weather_json;
-        let fullReport = [];
+      .then(function(obj){//Contains the weather weather_json
+        console.log(obj.list[0].dt_txt);
         if(disp === "All"){
           disp = obj.list.length;
         }
-
+        console.log(disp);
         $scope.reportList = []; //Resets current list before running.
 
         for(let x = 0; x < disp; x++){
@@ -78,10 +82,8 @@ app.controller('Controller',function($scope){
           //Wind default m/s
           //wind direction default uses degree notation
           //humidity %, cloudiness is % of cloud cover
-          fullReport.push(report);
+          $scope.reportList.push(report);
         };
-
-        $scope.reportList = fullReport;
 
       });
 
