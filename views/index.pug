@@ -6,10 +6,11 @@ block content
   div
     h1#intro= title
     p#greet Welcome to #{title}
-    p#info This is for Project One in my API course. It takes info from
+    p#info This is for Project Two in my API course. It takes info from
       a(href = "https://openweathermap.org/") openweathermap.org
-    p#info Thanks to that, I was able to make a weather report for Chicago, as well as other cities you can call.
-    p#info Currently Chicago is on display, but that can be adjusted with the nearby dropdown menu.
-    p The API lists the weather report over the next 5 days in intervals of 3 hours.
+    p#info Thanks to that, I was able to make a weather report that calls several prominent Illinois cities.
+    p#info You can select the city you want to view from the list.
+    p The API lists the weather report over the next 5 days in intervals of 3 hours when you select "All".
+    p The "imperial" unit is Farenheit, and the "metric" unit is Celsius.
 
     include ../public/html/interactive.html
