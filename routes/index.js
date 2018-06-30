@@ -74,20 +74,8 @@ module.exports = router;
 
 function direction(degrees){
   // The direction() function takes the degree of the wind, and converts it into an understandable cardinal direction
-  if(degrees >= 348.75 && degrees < 11.25) return "N";
-  else if(degrees < 33.75) return "N-NE";
-  else if(degrees < 56.25) return "NE";
-  else if(degrees < 78.75) return "E-NE";
-  else if(degrees < 101.25) return "E";
-  else if(degrees < 123.75) return "E-SE";
-  else if(degrees < 146.25) return "SE";
-  else if(degrees < 168.75) return "S-SE";
-  else if(degrees < 191.25) return "S";
-  else if(degrees < 213.75) return "S-SW";
-  else if(degrees < 236.25) return "SW";
-  else if(degrees < 258.75) return "W-SW";
-  else if(degrees < 281.25) return "W";
-  else if(degrees < 303.75) return "W-NW";
-  else if(degrees < 325.25) return "NW";
-  else return "N-NW";
+  if(degrees >= 348.75) degrees = 0;
+  let cardinal = ["N","N-NE","NE","E-NE","E","E-SE","SE","S-SE","S","S-SW","SW","W-SW","W","W-NW","NW","N-NW"];
+  let index = Math.floor(degrees/22.5);
+  return cardinal[index];
 }
