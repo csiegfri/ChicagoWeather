@@ -62,7 +62,7 @@ router.get('/', function(req, res, next){
       };
       //Once the reoort is populated with all requests, sends over to pug for construction
       res.render('index', {
-        title: 'Chicago Weather',
+        title: 'Illinois Weather',
         reports: fullReport
       });
 
