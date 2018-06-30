@@ -1,5 +1,5 @@
-<script src="../javascripts/buttons.js"></script> <!--Gets the JS code for interacting with the website-->
 <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js'></script>
+<script src="../javascripts/buttons.js"></script> <!--Gets the JS code for interacting with the website-->
 
 <section (ng-app="App" ng-controller="Controller")>
 <p> City: <select ng-model="selectedCity" ng-options="x for x in cities"></select></p>
@@ -24,16 +24,16 @@
   </thead>
   <tbody>
     <tr ng-repeat="report in reportList track by $index">
-      <td>${{report.date}}</td>
-      <td>${{report.temp}}</td>
-      <td>${{report.min}}</td>
-      <td>${{report.max}}</td>
-      <td>${{report.weath}}</td>
-      <td>${{report.cloud}}</td>
-      <td>${{report.hum}}</td>
-      <td>${{report.speed}}</td>
-      <td>${{report.dir}}</td>
-      <td>${{report.pres}}</td>
+      <td>{{report.date}}</td>
+      <td>{{report.temp}}</td>
+      <td>{{report.min}}</td>
+      <td>{{report.max}}</td>
+      <td>{{report.weath}}</td>
+      <td>{{report.cloud}}</td>
+      <td>{{report.hum}}</td>
+      <td>{{report.speed}}</td>
+      <td>{{report.dir}}</td>
+      <td>{{report.pres}}</td>
     </tr>
   </tbody>
 </table>
