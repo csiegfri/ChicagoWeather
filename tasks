@@ -1,9 +1,10 @@
 NEED
 
+'springfield' - 4896861
+'aurora' - 4883817
+'rockford' - 4907959
+'peoria' - 4905687
 
-Also weekly problem when stylesheet complete
-
-including a folder and background image
 
 
 DONE
@@ -18,3 +19,7 @@ Find better way to utilize the data? Not in table, but in some other type of dis
 Remove the github folder, and move all contents into ChicagoWeather proper
 
 Once finalized with that, work on the stylesheet - Need to pull and see how it functions
+
+Also weekly problem when stylesheet complete
+
+including a folder and background image
