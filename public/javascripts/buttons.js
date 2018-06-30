@@ -1,6 +1,12 @@
 const requ = require('request-promise-native');
 
-let options = {};
+let options = {
+  uri: "",
+  headers: {
+    'User-Agent': 'Request-Promise'
+  },
+  json: true
+};
 //Contains all conversions from original values.
 let conversions = {
   mintemp:0,
@@ -30,19 +36,15 @@ app.controller('Controller',function($scope){
 
   $scope.drawTable = function(city, unit, disp){
     let id = "";
+
     for(let x = 0; x < $scope.cities.length; x++){
       if(city === $scope.cities[x]){
         id = ids[x];
       }
     };
-    let url = "http://api.openweathermap.org/data/2.5/forecast?id=" + id + "&appid=083149282228ade2d95a8d79cd581982&units=" + unit;
-    options = {
-      uri: url,
-      headers: {
-        'User-Agent': 'Request-Promise'
-      },
-      json: true
-    };
+
+    options.uri = "http://api.openweathermap.org/data/2.5/forecast?id=" + id + "&appid=083149282228ade2d95a8d79cd581982&units=" + unit;
+
 
     requ(options)
       .then(function(weather_json)){
@@ -50,6 +52,10 @@ app.controller('Controller',function($scope){
         let fullReport = [];
         if(displayNum === "All"){
           displayNum = obj.list.length;
+        }
+
+        if(ran){
+          $scope.reportList = [];
         }
 
         for(let x = 0; x < displayNum; x++){
@@ -78,10 +84,8 @@ app.controller('Controller',function($scope){
           //humidity %, cloudiness is % of cloud cover
           fullReport.push(report);
         };
-        if(ran){
 
-        }
-
+        $scope.reportList = fullReport;
 
       };
 
