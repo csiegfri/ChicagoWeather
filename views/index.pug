@@ -13,34 +13,3 @@ block content(ng-app="App" ng-controller="Controller")
     p The API lists the weather report over the next 5 days in intervals of 3 hours.
 
     include ../public/html/interactive.html
-
-    h2#head Current City: #{currentCity}
-    p Displayed in: #{units}
-  table#allReports
-    thead
-      tr#tHeading
-        th time
-        th Temperature (F)
-        th Min Temp (F)
-        th Max Temp (F)
-        th Weather
-        th Cloudiness
-        th Humidity
-        th Wind Speed (mph)
-        th Wind direction
-        th Pressure (hPa)
-    tbody#generatedReports
-      - let counter = 0;
-      while counter < displays
-        tr
-          td #{reports[counter].date}
-          td #{reports[counter].temp}
-          td #{reports[counter].min}
-          td #{reports[counter].max}
-          td #{reports[counter].weath}
-          td #{reports[counter].cloud}
-          td #{reports[counter].hum}
-          td #{reports[counter].speed}
-          td #{reports[counter].dir}
-          td #{reports[counter].pres}
-        - counter++;
