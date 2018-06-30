@@ -49,8 +49,7 @@ app.controller('Controller',function($scope){
     let url = "http://api.openweathermap.org/data/2.5/forecast?id=" + id + "&appid=083149282228ade2d95a8d79cd581982&units=" + unit;
     console.log(url);
 
-    fetch(url)
-      .then(function(obj){//Contains the weather weather_json
+    $.getJSON(url, function(obj){//Contains the weather json info
         console.log(obj.list[0].dt_txt);
         if(disp === "All"){
           disp = obj.list.length;
@@ -84,7 +83,7 @@ app.controller('Controller',function($scope){
           //humidity %, cloudiness is % of cloud cover
           $scope.reportList.push(report);
         };
-
+        console.log(disp);
       });
 
     };
