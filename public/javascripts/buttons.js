@@ -27,6 +27,11 @@ app.controller('Controller',function($scope){
   $scope.displayNum = [5];
   $scope.reportList = [];
 
+  function help(){
+    console.log("help");
+  };
+
+
   function direction(degrees){
     // The direction() function takes the degree of the wind, and converts it into an understandable cardinal direction
     if(degrees >= 348.75) degrees = 0;
@@ -48,7 +53,7 @@ app.controller('Controller',function($scope){
 
 
     requ(options)
-      .then(function(weather_json)){
+      .then(function(weather_json){
         let obj = weather_json;
         let fullReport = [];
         if(disp === "All"){
@@ -86,7 +91,7 @@ app.controller('Controller',function($scope){
 
         $scope.reportList = fullReport;
 
-      };
+      });
 
-  }
-})
+    };
+};
