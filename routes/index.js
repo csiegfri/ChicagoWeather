@@ -61,9 +61,15 @@ router.get('/', function(req, res, next){
 
       };
       //Once the reoort is populated with all requests, sends over to pug for construction
+      //Current City for starting in Chicago, can be changed by User
+      //Imperial units of measurement.
+      //Displays the amount of reports given at a time
       res.render('index', {
         title: 'Illinois Weather',
-        reports: fullReport
+        reports: fullReport,
+        currentCity: "Chicago",
+        units: "Imperial",
+        displays: 10
       });
 
   });
