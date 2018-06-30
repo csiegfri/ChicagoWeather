@@ -60,7 +60,7 @@ body {
 	background-attachment: fixed;
 }
 /*Chaning h1 to be more bold.*/
-h1{
+h1, h2{
 	position: relative;
 	left: 1em;
 	font-size: 2.5em;
