@@ -10,12 +10,15 @@ let conversions = {
   windSpeed:0
 };
 
+let ran = false;
+
 let app = angular.module('App',[]);
 app.controller('Controller',function($scope){
   $scope.cities = ["Chicago","Aurora","Springfield","Rockford","Peoria"];
   let ids = ["4887398","4883817","4896861","4907959","4905687"];
   $scope.measures = ["imperial","metric"];
   $scope.display = [5,10,15,"All"];
+  $scope.reportList = [];
 
   function direction(degrees){
     // The direction() function takes the degree of the wind, and converts it into an understandable cardinal direction
@@ -45,8 +48,11 @@ app.controller('Controller',function($scope){
       .then(function(weather_json)){
         let obj = weather_json;
         let fullReport = [];
+        if(displayNum === "All"){
+          displayNum = obj.list.length;
+        }
 
-        for(let x = 0; x < obj.list.length; x++){
+        for(let x = 0; x < displayNum; x++){
 
           conversions.cTemp = obj.list[x].main.temp ; // Already in correct format
           conversions.minTemp = obj.list[x].main.temp_min ;
@@ -72,7 +78,10 @@ app.controller('Controller',function($scope){
           //humidity %, cloudiness is % of cloud cover
           fullReport.push(report);
         };
-        let table = document.getElementById('generatedReports');
+        if(ran){
+
+        }
+
 
       };
 
