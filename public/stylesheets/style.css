@@ -60,11 +60,14 @@ body {
 	background-attachment: fixed;
 }
 /*Chaning h1 to be more bold.*/
-h1, h2{
+h1{
 	position: relative;
-	left: 1em;
 	font-size: 2.5em;
 	color: red;
+	text-decoration: underline;
+}
+h2{
+	font-size: 1.8em;
 	text-decoration: underline;
 }
 
