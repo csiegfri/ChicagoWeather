@@ -16,14 +16,14 @@ let conversions = {
   windSpeed:0
 };
 
-let ran = false;
-
 let app = angular.module('App',[]);
 app.controller('Controller',function($scope){
-  $scope.cities = ["Chicago","Aurora","Springfield","Rockford","Peoria"];
-  let ids = ["4887398","4883817","4896861","4907959","4905687"];
-  $scope.measures = ["imperial","metric"];
-  $scope.display = [5,10,15,"All"];
+  $scope.cities = ["Chicago","Aurora","Springfield","Rockford","Peoria"]; //List of available cities for the project
+  $scope.selectedCity = $scope.cities[0]; // Default to Chicago
+  let ids = ["4887398","4883817","4896861","4907959","4905687"]; //coressponding API ids for the city they're associated with. The id of cities[0] is ids[0], and so on
+  $scope.measures = ["imperial","metric"]; //chooses units of measurement (F and C)
+  $scope.selectedUnit = $scope.measures[0]; //Defailt to F
+  $scope.display = [5,10,15,"All"]; //Amount of reports to display at once.
   $scope.reportList = [];
 
   function direction(degrees){
@@ -54,9 +54,7 @@ app.controller('Controller',function($scope){
           displayNum = obj.list.length;
         }
 
-        if(ran){
-          $scope.reportList = [];
-        }
+        $scope.reportList = []; //Resets current list before running.
 
         for(let x = 0; x < displayNum; x++){
 
