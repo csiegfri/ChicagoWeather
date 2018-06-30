@@ -20,4 +20,18 @@
       <th>Pressure (hPa)</th>
     </tr>
   </thead>
+  <tbody>
+    <tr ng-repeat="report in reportList track by $index">
+      <td>${{report.date}}</td>
+      <td>${{report.temp}}</td>
+      <td>${{report.min}}</td>
+      <td>${{report.max}}</td>
+      <td>${{report.weath}}</td>
+      <td>${{report.cloud}}</td>
+      <td>${{report.hum}}</td>
+      <td>${{report.speed}}</td>
+      <td>${{report.dir}}</td>
+      <td>${{report.pres}}</td>
+    </tr>
+  </tbody>
 </table>
