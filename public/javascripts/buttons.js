@@ -1,12 +1,4 @@
-const requ = require('request-promise-native');
 
-let options = {
-  uri: "",
-  headers: {
-    'User-Agent': 'Request-Promise'
-  },
-  json: true
-};
 //Contains all conversions from original values.
 let conversions = {
   mintemp:0,
@@ -49,10 +41,10 @@ app.controller('Controller',function($scope){
       }
     };
 
-    options.uri = "http://api.openweathermap.org/data/2.5/forecast?id=" + id + "&appid=083149282228ade2d95a8d79cd581982&units=" + unit;
+    let url = "http://api.openweathermap.org/data/2.5/forecast?id=" + id + "&appid=083149282228ade2d95a8d79cd581982&units=" + unit;
 
 
-    requ(options)
+    fetch(url)
       .then(function(weather_json){
         let obj = weather_json;
         let fullReport = [];
@@ -94,4 +86,4 @@ app.controller('Controller',function($scope){
       });
 
     };
-};
+});

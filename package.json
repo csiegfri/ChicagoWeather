@@ -16,6 +16,8 @@
     "pug": "^2.0.0-beta11",
     "request": "^2.87.0",
     "request-promise-native": "^1.0.5",
-    "start": "^5.1.0"
+    "require": "^2.4.20",
+    "start": "^5.1.0",
+    "uglify-js": "^3.4.2"
   }
 }
